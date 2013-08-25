@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Eventz.Data.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EventzDataStoreContainer">
+    <EntitySet Name="Events" EntityType="Eventz.Data.Store.Events" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Venues" EntityType="Eventz.Data.Store.Venues" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UpdateLogs" EntityType="Eventz.Data.Store.UpdateLogs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Storages" EntityType="Eventz.Data.Store.Storages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categories" EntityType="Eventz.Data.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Images" EntityType="Eventz.Data.Store.Images" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EventCategory" EntityType="Eventz.Data.Store.EventCategory" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="EventVenue" Association="Eventz.Data.Store.EventVenue">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="Venue" EntitySet="Venues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EventCategory_Event" Association="Eventz.Data.Store.FK_EventCategory_Event">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="EventCategory" EntitySet="EventCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EventCategory_Category" Association="Eventz.Data.Store.FK_EventCategory_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="EventCategory" EntitySet="EventCategory" />
+    </AssociationSet>
+    <AssociationSet Name="Eventimage" Association="Eventz.Data.Store.Eventimage">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="image" EntitySet="Images" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="StartTime" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EventUrl" Type="nvarchar" Nullable="true" MaxLength="2083" />
+    <Property Name="State" Type="tinyint" Nullable="false" />
+    <Property Name="AttendingCount" Type="int" Nullable="true" />
+    <Property Name="VenueId" Type="int" Nullable="true" />
+    <Property Name="VenueId1" Type="int" Nullable="true" />
+    <Property Name="Version" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Venues">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="Phone" Type="nvarchar" Nullable="true" MaxLength="20" />
+    <Property Name="Lon" Type="float" Nullable="true" />
+    <Property Name="Lat" Type="float" Nullable="true" />
+    <Property Name="Street" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="State" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="City" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="Country" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="Zip" Type="nvarchar" Nullable="true" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="UpdateLogs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StorageType" Type="tinyint" Nullable="false" />
+    <Property Name="UpdateType" Type="tinyint" Nullable="false" />
+    <Property Name="Time" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Storages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StorageType" Type="tinyint" Nullable="false" />
+    <Property Name="LastUpdatedWeek" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdatedClosest" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdatedToday" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Images">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Type" Type="tinyint" Nullable="false" />
+    <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EventId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EventCategory">
+    <Key>
+      <PropertyRef Name="Events_Id" />
+      <PropertyRef Name="Categories_Id" />
+    </Key>
+    <Property Name="Events_Id" Type="bigint" Nullable="false" />
+    <Property Name="Categories_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="EventVenue">
+    <End Role="Event" Type="Eventz.Data.Store.Events" Multiplicity="*" />
+    <End Role="Venue" Type="Eventz.Data.Store.Venues" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Venue">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="VenueId1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Eventimage">
+    <End Role="Event" Type="Eventz.Data.Store.Events" Multiplicity="1" />
+    <End Role="image" Type="Eventz.Data.Store.Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="image">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EventCategory_Event">
+    <End Role="Event" Type="Eventz.Data.Store.Events" Multiplicity="1" />
+    <End Role="EventCategory" Type="Eventz.Data.Store.EventCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventCategory">
+        <PropertyRef Name="Events_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EventCategory_Category">
+    <End Role="EventCategory" Type="Eventz.Data.Store.EventCategory" Multiplicity="*" />
+    <End Role="Category" Type="Eventz.Data.Store.Categories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventCategory">
+        <PropertyRef Name="Categories_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Eventz.Data" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EntitiesContext" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Events" EntityType="Eventz.Data.Event" />
+          <EntitySet Name="Venues" EntityType="Eventz.Data.Venue" />
+          <AssociationSet Name="EventVenue" Association="Eventz.Data.EventVenue">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Venue" EntitySet="Venues" />
+          </AssociationSet>
+          <EntitySet Name="UpdateLogs" EntityType="Eventz.Data.UpdateLog" />
+          <EntitySet Name="Storages" EntityType="Eventz.Data.Storage" />
+          <EntitySet Name="Categories" EntityType="Eventz.Data.Category" />
+          <AssociationSet Name="EventCategory" Association="Eventz.Data.EventCategory">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <EntitySet Name="Images" EntityType="Eventz.Data.Image" />
+          <AssociationSet Name="Eventimage" Association="Eventz.Data.Eventimage">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="image" EntitySet="Images" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="EventUrl" Nullable="true" MaxLength="2083" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Byte" Nullable="false" />
+          <Property Name="AttendingCount" Nullable="true" Type="Int32" />
+          <Property Type="Int32" Name="VenueId" Nullable="true" />
+          <NavigationProperty Name="Venue" Relationship="Eventz.Data.EventVenue" FromRole="Event" ToRole="Venue" />
+          <Property Name="VenueId1" Nullable="true" Type="Int32" />
+          <Property Type="Byte" Name="Version" Nullable="false" />
+          <NavigationProperty Name="Categories" Relationship="Eventz.Data.EventCategory" FromRole="Event" ToRole="Category" />
+          <NavigationProperty Name="Images" Relationship="Eventz.Data.Eventimage" FromRole="Event" ToRole="image" />
+        </EntityType>
+        <EntityType Name="Venue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="256" Unicode="true" Nullable="true" />
+          <Property Type="String" Name="Phone" MaxLength="20" Nullable="true" />
+          <Property Type="Double" Name="Lon" Nullable="true" />
+          <Property Type="Double" Name="Lat" Nullable="true" />
+          <Property Type="String" Name="Street" Nullable="true" Unicode="true" MaxLength="256" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="256" Unicode="true" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="256" Unicode="true" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="256" Unicode="true" />
+          <Property Type="String" Name="Zip" Nullable="true" MaxLength="256" Unicode="true" />
+          <NavigationProperty Name="Events" Relationship="Eventz.Data.EventVenue" FromRole="Venue" ToRole="Event" />
+        </EntityType>
+        <Association Name="EventVenue">
+          <End Type="Eventz.Data.Event" Role="Event" Multiplicity="*" />
+          <End Type="Eventz.Data.Venue" Role="Venue" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Venue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="VenueId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UpdateLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Byte" Name="StorageType" Nullable="false" />
+          <Property Type="Byte" Name="UpdateType" Nullable="false" />
+          <Property Type="DateTime" Name="Time" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Storage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Eventz.Data.StorageType" Name="StorageType" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdatedWeek" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdatedClosest" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdatedToday" Nullable="false" />
+        </EntityType>
+        <EnumType Name="StorageType" UnderlyingType="Byte">
+          <Member Name="Facebook" />
+          <Member Name="Meetup" />
+          <Member Name="ClubZone" />
+        </EnumType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <NavigationProperty Name="Events" Relationship="Eventz.Data.EventCategory" FromRole="Category" ToRole="Event" />
+        </EntityType>
+        <Association Name="EventCategory">
+          <End Type="Eventz.Data.Event" Role="Event" Multiplicity="*" />
+          <End Type="Eventz.Data.Category" Role="Category" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FilePath" Nullable="false" />
+          <Property Type="Byte" Name="Type" Nullable="false" />
+          <Property Type="String" Name="Url" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="Eventz.Data.Eventimage" FromRole="image" ToRole="Event" />
+          <Property Type="Int64" Name="EventId" Nullable="false" />
+        </EntityType>
+        <Association Name="Eventimage">
+          <End Type="Eventz.Data.Event" Role="Event" Multiplicity="1" />
+          <End Type="Eventz.Data.Image" Role="image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="image">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EventzDataStoreContainer" CdmEntityContainer="EntitiesContext">
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="IsTypeOf(Eventz.Data.Event)">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="EventUrl" ColumnName="EventUrl" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="AttendingCount" ColumnName="AttendingCount" />
+          <ScalarProperty Name="VenueId" ColumnName="VenueId" />
+          <ScalarProperty Name="VenueId1" ColumnName="VenueId1" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Venues">
+      <EntityTypeMapping TypeName="IsTypeOf(Eventz.Data.Venue)">
+        <MappingFragment StoreEntitySet="Venues">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Lon" ColumnName="Lon" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Street" ColumnName="Street" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UpdateLogs">
+      <EntityTypeMapping TypeName="IsTypeOf(Eventz.Data.UpdateLog)">
+        <MappingFragment StoreEntitySet="UpdateLogs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="StorageType" ColumnName="StorageType" />
+          <ScalarProperty Name="UpdateType" ColumnName="UpdateType" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Storages">
+      <EntityTypeMapping TypeName="IsTypeOf(Eventz.Data.Storage)">
+        <MappingFragment StoreEntitySet="Storages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="StorageType" ColumnName="StorageType" />
+          <ScalarProperty Name="LastUpdatedWeek" ColumnName="LastUpdatedWeek" />
+          <ScalarProperty Name="LastUpdatedClosest" ColumnName="LastUpdatedClosest" />
+          <ScalarProperty Name="LastUpdatedToday" ColumnName="LastUpdatedToday" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(Eventz.Data.Category)">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="IsTypeOf(Eventz.Data.Image)">
+        <MappingFragment StoreEntitySet="Images">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="EventCategory" TypeName="Eventz.Data.EventCategory" StoreEntitySet="EventCategory">
+      <EndProperty Name="Event">
+        <ScalarProperty Name="Id" ColumnName="Events_Id" />
+      </EndProperty>
+      <EndProperty Name="Category">
+        <ScalarProperty Name="Id" ColumnName="Categories_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

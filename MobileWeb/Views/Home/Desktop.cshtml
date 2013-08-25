@@ -1,0 +1,95 @@
+﻿@model List<MobileWeb.Models.events_day>
+
+@{ var Categories = (List<Eventz.Data.Category>)ViewBag.Categories;
+ }
+<div id="modal">
+    <div>
+        <a href="#close">Close</a>
+        <table border="0">
+            <tr>
+                <th colspan="2">
+                    <h1>BC Lions vs. Winnipeg Blue Bombers</h1>
+                </th>
+            </tr>
+            <tr>
+                <td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td>Time:</td>
+            </tr>
+            <tr>
+                <td>111 Main street, Vancouver</td>
+                <td>June 13, 2013, at 10pm</td>
+            </tr>
+            <tr>
+                <td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Phone:</td>
+                <td>Price:</td>
+            </tr>
+            <tr>
+                <td>(777) 888-11-22</td>
+                <td>at $20</td>
+            </tr>
+            <tr>
+                <td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2">Description:</td>
+            </tr>
+            <tr>
+                <td colspan="2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam cursus. Morbi ut mi. Nullam enim leo, egestas id, condimentum at, laoreet mattis, massa. Sed eleifend nonummy diam. Praesent mauris ante, elementum et, bibendum at, posuere sit amet, nibh. Duis tincidunt lectus quis dui viverra vestibulum. Suspendisse vulputate aliquam dui. Nulla elementum dui ut augue. Aliquam vehicula mi at mauris. Maecenas placerat, nisl at consequat rhoncus, sem nunc gravida justo, quis eleifend arcu velit quis lacus. Morbi magna magna, tincidunt a, mattis non, imperdiet vitae, tellus. Sed odio est, auctor ac, sollicitudin in, consequat vitae, orci. Fusce id felis. Vivamus sollicitudin metus eget eros.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam cursus. Morbi ut mi. Nullam enim leo, egestas id, condimentum at, laoreet mattis, massa. Sed eleifend nonummy diam. Praesent mauris ante, elementum et, bibendum at, posuere sit amet, nibh. Duis tincidunt lectus quis dui viverra vestibulum. Suspendisse vulputate aliquam dui. Nulla elementum dui ut augue. Aliquam vehicula mi at mauris. Maecenas placerat, nisl at consequat rhoncus, sem nunc gravida justo, quis eleifend arcu velit quis lacus. Morbi magna magna, tincidunt a, mattis non, imperdiet vitae, tellus. Sed odio est, auctor ac, sollicitudin in, consequat vitae, orci. Fusce id felis. Vivamus sollicitudin metus eget eros.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam cursus. Morbi ut mi. Nullam enim leo, egestas id, condimentum at, laoreet mattis, massa. Sed eleifend nonummy diam. Praesent mauris ante, elementum et, bibendum at, posuere sit amet, nibh. Duis tincidunt lectus quis dui viverra vestibulum. Suspendisse vulputate aliquam dui. Nulla elementum dui ut augue. Aliquam vehicula mi at mauris. Maecenas placerat, nisl at consequat rhoncus, sem nunc gravida justo, quis eleifend arcu velit quis lacus. Morbi magna magna, tincidunt a, mattis non, imperdiet vitae, tellus. Sed odio est, auctor ac, sollicitudin in, consequat vitae, orci. Fusce id felis. Vivamus sollicitudin metus eget eros.</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!-- modal -->
+
+
+<div class="wrap">
+
+    <a class="logo" href="index.html">Events</a>
+
+    <div class="separator"></div>
+
+     @foreach (var category in Categories)
+     {
+    <input type="radio" name="menu" id="@category.Id" value="@category.Name"/><label for="@category.Name">@category.Name</label>
+     }
+
+    <div class="separator"></div>
+
+    <input type="radio" name="date" id="Today" value="Today" checked="checked" /><label for="Today">Today</label>
+    <input type="radio" name="date" id="Tomorrow" value="Tomorrow" /><label for="Tomorrow">Tomorrow</label>
+    <input type="radio" name="date" id="Choose" value="Choose" /><label for="Choose">Choose</label>
+
+    <div class="container">
+
+        @foreach (var dayEvents in Model)
+        {
+            <br/>
+                <div>@dayEvents.date.ToLongDateString()</div>
+            <br/>
+            
+             foreach (var evnt in dayEvents.events)
+             {
+            
+                <div class="box" data-info="Recommended Sport">
+                    <div><a href="#modal"><img src="@evnt.image_url" /></a></div>
+                    <div>
+                        <h1>@evnt.name</h1>
+                        <p>@evnt.time</p>
+                        <p>PNE Amphitheatre</p>
+                    </div>
+                </div>
+             }
+                 
+        }
+
+    </div>
+    <!--  container   -->
+
+</div>
+<!-- wrap -->

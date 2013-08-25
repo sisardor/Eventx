@@ -1,0 +1,9 @@
+﻿@*@model List<MobileWeb.Models.EventVM>*@
+
+
+<link href="https://app.unbounce.com/stylesheets/reset.css" media="screen" rel="stylesheet" type="text/css">
+<link href="https://app.unbounce.com/stylesheets/page_defaults.css" media="screen" rel="stylesheet" type="text/css">
+
+@foreach(var evnt in Model){
+    @Html.Partial("EventThumbnail", evnt)
+}

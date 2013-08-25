@@ -1,0 +1,212 @@
+﻿/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+    display: block;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+
+/* jQuery mobile styles
+-----------------------------------------------------------*/
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	font-size: 1em;
+	list-style: none;
+	color: rgba(0,0,0,0.6);
+	text-decoration: none;
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgba(0,0,0,0.1);
+}
+
+
+a:hover, a:active  {
+	color: rgba(0,0,0,1);
+	text-decoration: underline;
+}
+
+.wrap {
+	display: inline-block;
+	width: 200px;
+	
+}
+
+.logo {
+	display: inline-block;
+	text-align: center;
+	width: 200px;
+	margin-top: 20px;
+	font-size: 2em;	
+	text-shadow: 1px 1px 1px rgba(250,250,250,1);
+}
+
+.logo:hover {text-decoration: none; }
+
+.separator {
+	width: 150px;
+	margin: 20px auto;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+	box-shadow: 0px 1px 1px rgba(250,250,250,1);
+}
+
+input {
+	margin-left: 35px;
+	margin-right: 2px;
+	margin-top: 5px;
+}
+
+label {
+	display: inline-block;
+	width: 150px;
+	cursor: pointer;
+	margin-top: 5px;
+}
+
+label:hover, label:checked {
+	color: rgba(0,0,0,1);
+	text-decoration: underline;
+}
+
+input[id="Recommended"]:checked ~ .container .box[data-info~="Recommended"] {display: inline-block; } 
+input[id="Competitions"]:checked ~ .container .box[data-info~="Competitions"] {display: inline-block; } 
+input[id="Meetings"]:checked ~ .container .box[data-info~="Meetings"] {display: inline-block; } 
+input[id="Festivals"]:checked ~ .container .box[data-info~="Festivals"] {display: inline-block; } 
+input[id="Parties"]:checked ~ .container .box[data-info~="Parties"] {display: inline-block; } 
+input[id="Business"]:checked ~ .container .box[data-info~="Business"] {display: inline-block; } 
+input[id="Sport"]:checked ~ .container .box[data-info~="Sport"] {display: inline-block; } 
+input[id="Concerts"]:checked ~ .container .box[data-info~="Concerts"] {display: inline-block; } 
+
+input[id="Recommended"]:hover ~ .container .box[data-info~="Recommended"] img {opacity: 1; } 
+input[id="Competitions"]:hover ~ .container .box[data-info~="Competitions"] img {opacity: 1; } 
+input[id="Meetings"]:hover ~ .container .box[data-info~="Meetings"] img {opacity: 1; } 
+input[id="Festivals"]:hover ~ .container .box[data-info~="Festivals"] img {opacity: 1; } 
+input[id="Parties"]:hover ~ .container .box[data-info~="Parties"] img {opacity: 1; } 
+input[id="Business"]:hover ~ .container .box[data-info~="Business"] img {opacity: 1; } 
+input[id="Sport"]:hover ~ .container .box[data-info~="Sport"] img {opacity: 1; } 
+input[id="Concerts"]:hover ~ .container .box[data-info~="Concerts"] img {opacity: 1; } 
+
+.container {
+	position: absolute;
+	top:0;
+	left: 200px;
+	
+}
+
+.box {
+	display: none;
+	width: 190px;
+	height: 350px;
+	margin: 10px;
+	background-color: rgba(250,250,250,1);
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+} 
+
+.box div:first-child {
+	height: 80%;
+	overflow: hidden;
+}
+
+.box div img {
+	width: 180px;
+	opacity: 0.8;
+	margin: 5px;
+}
+
+.box:hover div img {
+	opacity: 1;
+	cursor: pointer;
+}
+
+.box div:last-child {
+	margin: 5px;;
+}
+
+.box h1 {
+	font-size: 0.8em; 
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.box p {
+	font-size: 0.7em; 
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
+
+
+#modal {
+	display: none;
+	position: absolute;
+	z-index: 1000000;
+	background-color: rgba(0,0,0,0.8);
+	width: 100%;
+}
+
+#modal>div {
+	background-color: rgba(250,250,250,1);
+	max-width: 600px;
+	margin: 20px auto;
+	padding: 20px;
+}
+
+#modal>div>a {
+	float: right;
+}
+
+#modal:target {
+	display: block;
+}
+
+#modal:target + .wrap, #modal:target + .wrap>.container {
+	position: fixed;
+}
+
+table {
+	width: 100%;
+}
+
+td {
+	width: 50%;
+}
+
+
+
+@media screen and (max-width: 600px) {
+
+
+}
