@@ -27,7 +27,7 @@ namespace MobileWeb.Models
             venue = eventEntity.Venue == null ? "" : !String.IsNullOrEmpty(eventEntity.Venue.Name) 
                 ? eventEntity.Venue.Name : eventEntity.Venue.Street;
             var img = eventEntity.Images.Where(i => i.Type == 1).SingleOrDefault();
-            image_url = img.Url ?? "";
+            image_url = "";// img.Url ?? "";
             event_url = eventEntity.EventUrl;
             attending_count = eventEntity.AttendingCount;
         }

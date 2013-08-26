@@ -122,7 +122,7 @@ input[id="Concerts"]:hover ~ .container .box[data-info~="Concerts"] img {opacity
 }
 
 .box {
-	display: none;
+	float:left;
 	width: 190px;
 	height: 350px;
 	margin: 10px;

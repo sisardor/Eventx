@@ -20,6 +20,13 @@ namespace MobileWeb
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
+            bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
+                      "~/Scripts/angular.js",
+                      "~/Scripts/angular-resource.js",
+                      "~/Scripts/app/app.js",
+                      "~/Scripts/app/services.js",
+                      "~/Scripts/app/controllers.js"
+            ));
 
             bundles.Add(new ScriptBundle("~/bundles/jquerymobile").Include("~/Scripts/jquery.mobile*"));
 

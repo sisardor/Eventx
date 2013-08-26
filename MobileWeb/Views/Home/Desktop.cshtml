@@ -66,7 +66,7 @@
     <input type="radio" name="date" id="Choose" value="Choose" /><label for="Choose">Choose</label>
 
     <div class="container">
-
+        @*
         @foreach (var dayEvents in Model)
         {
             <br/>
@@ -87,7 +87,10 @@
              }
                  
         }
+        *@
 
+
+        <div ng-view></div><!-- This is used by angular, it'll be replace by template -->
     </div>
     <!--  container   -->
 

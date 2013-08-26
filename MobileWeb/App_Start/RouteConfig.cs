@@ -12,7 +12,16 @@ namespace MobileWeb
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.LowercaseUrls = true;
+            routes.MapRoute(
+                name: "Templates",
+                url: "{controller}/templates/{template}",
+                defaults: new
+                {
+                    controller = "Home",
+                    action = "Templates"
+                }
+             );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
