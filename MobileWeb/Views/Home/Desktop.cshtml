@@ -53,12 +53,19 @@
     <a class="logo" href="index.html">Events</a>
 
     <div class="separator"></div>
-
-     @foreach (var category in Categories)
+    <div>
+        <ul>
+            @foreach (var category in Categories)
+            {
+                <li><a href="#/@category.Name.ToLower()">@category.Name</a></li>
+            }
+        </ul>
+    </div>
+     @*  @foreach (var category in Categories)
      {
     <input type="radio" name="menu" id="@category.Id" value="@category.Name"/><label for="@category.Name">@category.Name</label>
      }
-
+     *@
     <div class="separator"></div>
 
     <input type="radio" name="date" id="Today" value="Today" checked="checked" /><label for="Today">Today</label>
@@ -90,7 +97,7 @@
         *@
 
 
-        <div ng-view></div><!-- This is used by angular, it'll be replace by template -->
+        <div ng-view></div><!-- This is used by angular, it'll be replaced by template -->
     </div>
     <!--  container   -->
 
