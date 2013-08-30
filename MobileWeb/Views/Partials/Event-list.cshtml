@@ -1,4 +1,4 @@
-﻿<div class="box" data-info="Recommended Sport" ng-repeat="event in events">
+﻿<!--div class="box" data-info="Recommended Sport" ng-repeat="event in events">
     <div><a href="#/{{event.category || 'meetup'}}/{{event.id || 12}}"><img src="http://flickholdr.com/200/275" alt="iamge" /></a></div>
     <div>
         <p>SARDOR ISAKOV</p>
@@ -8,7 +8,45 @@
     </div>
 
 
+</div-->
+
+<div class="grid-view" style="margin-top:50px;">
+    <div class="project-cover cfix" ng-repeat="event in events">
+        <div class="cover-img">
+            <a href="http://www.behance.net/gallery/Real-Talk-Burundi-Radio-Show/3921699" class="cover-img-link">
+                <img src="http://flickholdr.com/250/300" class="cover-img-el cover-img-standard" nopin="nopin" />
+            </a>
+        </div>
+        <div class="cover-info-stats">
+            <div class="cover-info">
+                <div class="cover-name">
+                    <a href="http://www.behance.net/gallery/Real-Talk-Burundi-Radio-Show/3921699" class="projectName cover-name-link">Real Talk Burundi Radio Show</a>
+                </div>
+                <div class="cover-by-wrap">
+                    <div class="cover-by">by</div>
+                    <div class="cover-by-link">
+                        <div class="single-owner">
+                            <a class="cover-link" href="http://www.behance.net/leahhazard" title="Leah Hazard">Leah Hazard</a>
+                        </div>
+                    </div>
+                </div><!-- .cover-by-wrap -->
+            </div><!-- .cover-info -->
+            <div class="cover-stat-fields-wrap">
+                <div class="cover-stat-wrap">
+
+
+                </div><!-- .cover-stat-wrap -->
+                <div class="cover-fields">
+                    <a href="/?field=137" title="Creative Direction">Creative Direction</a><span class="separator">,</span><a href="/?field=54" title="Journalism">Journalism</a>
+                </div><!-- .cover-fields -->
+            </div><!-- .cover-info -->
+        </div><!-- #cover-stat-fields-wrap -->
+    </div>
+
+
 </div>
+
+
 <div class="box">
     <div><a href="#"><img src="http://placehold.it/200x250" alt="iamge"></a></div>
     <div>
